@@ -1,0 +1,44 @@
+id: task-08-env-variables
+title: Environment Variable Management with dotenv
+description: |
+  Set up environment variable management in a Next.js application using the dotenv package.
+
+  **Requirements:**
+  1. Install dotenv dependency.
+  2. Create a .env file with environment variables (API_URL, DATABASE_URL, etc.).
+  3. Create a .env.example file with placeholder values.
+  4. Update next.config.js to expose environment variables to the client.
+  5. Create a page that demonstrates server-side and client-side environment variable access.
+  6. Create an API route that uses environment variables.
+  7. Create a Node.js script that demonstrates environment variable usage.
+  8. Configure both serverRuntimeConfig and publicRuntimeConfig in Next.js.
+
+author_email: admin@cli-arena.com
+difficulty: easy
+estimated_time: 20
+tags:
+  - nextjs
+  - dotenv
+  - environment-variables
+  - configuration
+
+prerequisites:
+  - Basic knowledge of Next.js
+  - Understanding of environment variables
+
+files_to_modify:
+  - .env
+  - .env.example
+  - next.config.js
+  - src/pages/index.tsx
+  - src/pages/api/env-demo.ts
+  - scripts/env-demo.js
+
+success_criteria:
+  - The dotenv dependency is installed and configured.
+  - The .env and .env.example files are created with proper variables.
+  - The next.config.js includes serverRuntimeConfig and publicRuntimeConfig.
+  - The index page demonstrates both server-side and client-side env var access.
+  - The API route correctly uses environment variables.
+  - The Node.js script demonstrates environment variable loading.
+  - Environment variables are properly exposed to the client where needed.

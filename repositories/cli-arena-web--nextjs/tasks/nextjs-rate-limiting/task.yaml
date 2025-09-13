@@ -1,0 +1,42 @@
+id: nextjs-rate-limiting
+title: Implement API Rate Limiting in Next.js
+description: |
+  Implement API rate limiting in a Next.js application to restrict excessive client requests.
+
+  **Requirements:**
+  1. Create a rate limiting utility using in-memory storage (Map).
+  2. Create an API route at `/api/limited` that responds with a success message.
+  3. Implement rate limiting logic to allow only 5 requests per minute per IP.
+  4. Return HTTP status 429 (Too Many Requests) when rate limit is exceeded.
+  5. Include rate limit headers in responses (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset).
+  6. Implement IP address detection from request headers.
+  7. Add proper error handling and cleanup for expired entries.
+  8. Return appropriate error message when rate limit is exceeded.
+
+author_email: admin@cli-arena.com
+difficulty: hard
+estimated_time: 30
+tags:
+  - nextjs
+  - rate-limiting
+  - api
+  - middleware
+  - security
+
+prerequisites:
+  - Basic knowledge of Next.js API routes
+  - Understanding of HTTP status codes
+
+files_to_modify:
+  - src/lib/rateLimit.ts
+  - src/pages/api/limited.ts
+
+success_criteria:
+  - The rate limiting utility is implemented with in-memory Map storage.
+  - The `/api/limited` route responds with success message for valid requests.
+  - Rate limiting allows only 5 requests per minute per IP address.
+  - HTTP status 429 is returned when rate limit is exceeded.
+  - Rate limit headers are included in API responses.
+  - IP address detection works correctly from request headers.
+  - Expired rate limit entries are properly cleaned up.
+  - Error handling is implemented for rate limit exceeded scenarios.

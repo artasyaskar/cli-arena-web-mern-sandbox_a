@@ -1,0 +1,28 @@
+id: refactor-layered-architecture
+title: "Refactor Backend to a Layered Architecture"
+description: |
+  The backend codebase is growing, and business logic is currently mixed within the controller files. To improve separation of concerns, maintainability, and testability, this task is to refactor the backend into a more formal layered architecture.
+
+  **Requirements:**
+  1.  **Create a Service Layer:** Introduce a new `services` directory. Create `authService.ts` and `productService.ts`. All business logic (e.g., checking passwords, validating data before creation, etc.) should be moved from the controllers into these service files.
+  2.  **Create a Repository/DAL:** Introduce a new `repositories` directory. Create a `productRepository.ts` file. This file should be responsible for all direct interactions with the `Product` model in the database (e.g., `find`, `create`). The `productService` should use this repository instead of interacting with the Mongoose model directly. (For this task, the `authService` can continue to use the `User` model directly).
+  3.  **Refactor Controllers:** The `authController.ts` and `productController.ts` files should be thinned down significantly. Their primary responsibility should be to handle the HTTP request and response, parse input, and call the appropriate service method. They should not contain any business logic or direct database calls.
+  4.  The overall API functionality must remain identical. All existing tests for authentication, products, and security must still pass after the refactor.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "medium"
+estimated_time: 50
+tags: ["refactor", "architecture", "backend", "SOLID"]
+prerequisites: ["add-jwt-authentication", "add-role-based-access-control"]
+files_to_modify:
+  - /repo/src/server/src/controllers/authController.ts
+  - /repo/src/server/src/controllers/productController.ts
+  - /repo/src/server/src/services/authService.ts
+  - /repo/src/server/src/services/productService.ts
+  - /repo/src/server/src/repositories/productRepository.ts
+success_criteria:
+  - "All existing API tests must continue to pass."
+  - "The `architecture.test.ts` must pass, verifying the existence of the new service and repository files."
+  - "The `productController` and `authController` are significantly smaller and delegate logic to the service layer."
+  - "The `productService` uses the `productRepository` for database operations."
+  - "The application's external behavior is unchanged."

@@ -1,0 +1,38 @@
+id: add-file-upload-s3
+title: "Implement Product Image Upload"
+description: |
+  To make product listings more appealing, users need the ability to upload an image for each product. This task involves creating a file upload endpoint and integrating it with the frontend.
+
+  For simplicity, instead of uploading to a real S3 bucket, the server will store the uploaded files in a local `/uploads` directory.
+
+  **Backend Requirements:**
+  1.  Use the `multer` library to handle `multipart/form-data` uploads.
+  2.  Create a new endpoint `POST /api/products/:id/image` to handle the image upload for a specific product. This endpoint should be protected and only accessible by admins.
+  3.  The uploaded file should be saved to an `uploads/` directory in the server's root.
+  4.  Update the `Product` model to include an `imageUrl` field, which will store the path to the uploaded file (e.g., `/uploads/filename.png`).
+  5.  The new endpoint should update the corresponding product in the database with this `imageUrl`.
+
+  **Frontend Requirements:**
+  1.  Add a file input field to the "Add Product" form.
+  2.  After creating a product, the UI should allow uploading an image for it.
+  3.  The product listing should display the image if `imageUrl` exists for a product.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 55
+tags: ["feature", "file-upload", "multer", "backend", "frontend"]
+prerequisites: ["add-jwt-authentication"]
+files_to_modify:
+  - /repo/src/server/src/models/Product.ts
+  - /repo/src/server/src/routes/productRoutes.ts
+  - /repo/src/server/src/controllers/productController.ts
+  - /repo/src/server/src/middleware/upload.ts
+  - /repo/src/client/src/App.tsx
+  - /repo/src/server/package.json
+success_criteria:
+  - "The `upload.test.ts` file must pass."
+  - "An admin can successfully upload an image file to the `/api/products/:id/image` endpoint."
+  - "The uploaded file must be saved in the `uploads/` directory on the server."
+  - "The corresponding product's `imageUrl` field in the database is correctly updated with the file path."
+  - "Non-admin users receive a 403 Forbidden error when trying to upload an image."
+  - "The frontend shows a file input and can display uploaded images."

@@ -1,0 +1,35 @@
+id: add-security-enhancements
+title: "Harden API with Security Best Practices"
+description: |
+  The API currently lacks some common security measures that are essential for production environments. This task is to harden the API by implementing three key security enhancements: setting security headers, enforcing rate limiting, and validating user input.
+
+  **Requirements:**
+  1.  **Security Headers:** Integrate the `helmet` library to set various security-related HTTP headers on all responses.
+  2.  **Rate Limiting:** Use `express-rate-limit` to protect against brute-force attacks. Apply a rate limit of max 10 requests per minute to the `POST /api/auth/login` endpoint.
+  3.  **Input Validation:** Use `express-validator` to validate and sanitize user input.
+      - For the `POST /api/auth/register` route:
+        - `email` must be a valid email address.
+        - `password` must be at least 6 characters long.
+      - For the `POST /api/products` route:
+        - `name` must not be empty.
+        - `price` must be a positive number.
+        - `category` must not be empty.
+      - Invalid requests should be rejected with a `400 Bad Request` status and a clear error message.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "medium"
+estimated_time: 40
+tags: ["security", "helmet", "rate-limit", "validation", "backend"]
+prerequisites: ["add-jwt-authentication"]
+files_to_modify:
+  - /repo/src/server/src/index.ts
+  - /repo/src/server/src/routes/authRoutes.ts
+  - /repo/src/server/src/routes/productRoutes.ts
+  - /repo/src/server/src/middleware/validation.ts
+  - /repo/src/server/package.json
+success_criteria:
+  - "All new security-related tests must pass."
+  - "API responses include security headers set by Helmet (e.g., `X-Powered-By` is removed)."
+  - "Making more than 10 login attempts within a minute results in a `429 Too Many Requests` error."
+  - "Registering with an invalid email or short password results in a `400` error with a descriptive message."
+  - "Creating a product with an empty name or negative price results in a `400` error with a descriptive message."

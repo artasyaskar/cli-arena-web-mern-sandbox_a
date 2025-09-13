@@ -1,0 +1,36 @@
+id: refactor-react-components
+title: "Refactor Frontend into Reusable React Components"
+description: |
+  The main frontend file, `src/client/src/App.tsx`, has become a very large "god component" that handles authentication forms, product lists, adding new products, search, and notifications. This makes the code hard to read, maintain, and test.
+
+  **Your Task:**
+  Refactor the `App.tsx` file by extracting its distinct functionalities into smaller, single-purpose, reusable components.
+
+  **Requirements:**
+  1.  Create a new directory: `src/client/src/components`.
+  2.  Create the following new components inside this directory by moving the relevant code and logic from `App.tsx`:
+      - `AuthForm.tsx`: The form for user login and registration.
+      - `ProductList.tsx`: The component that displays the list of products.
+      - `AddProductForm.tsx`: The form for adding a new product.
+      - `SearchBar.tsx`: The search input bar.
+      - `Notifications.tsx`: The component that displays real-time notifications.
+  3.  Refactor `App.tsx` to be a lean top-level component. It should import the new components and be primarily responsible for state management and composing the main application layout.
+  4.  The overall appearance and functionality of the application must remain exactly the same after the refactor.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "medium"
+estimated_time: 45
+tags: ["refactor", "frontend", "react", "components"]
+prerequisites: ["add-file-upload-s3"]
+files_to_modify:
+  - /repo/src/client/src/App.tsx
+  - /repo/src/client/src/components/AuthForm.tsx
+  - /repo/src/client/src/components/ProductList.tsx
+  - /repo/src/client/src/components/AddProductForm.tsx
+  - /repo/src/client/src/components/SearchBar.tsx
+  - /repo/src/client/src/components/Notifications.tsx
+success_criteria:
+  - "The `component.structure.test.ts` file must pass, verifying the new component files exist."
+  - "The `App.tsx` file is significantly smaller and imports the new components."
+  - "All frontend functionality (auth, product listing, search, notifications, etc.) works exactly as it did before the refactor."
+  - "The application UI is visually unchanged."

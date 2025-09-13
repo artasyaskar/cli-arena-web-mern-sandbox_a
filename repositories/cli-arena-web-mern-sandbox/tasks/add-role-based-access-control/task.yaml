@@ -1,0 +1,33 @@
+id: add-role-based-access-control
+title: "Add Role-Based Access Control (RBAC)"
+description: |
+  Currently, any authenticated user can create products. This task is to introduce a role-based authorization system to restrict certain actions to administrators.
+
+  **Requirements:**
+  1.  Update the `User` model to include a `role` field. The possible values are `'user'` and `'admin'`, with `'user'` being the default.
+  2.  Create a new authorization middleware that checks if the logged-in user has the `'admin'` role.
+  3.  Protect the product creation endpoint (`POST /api/products`) with this new admin middleware. Regular users should receive a `403 Forbidden` error if they attempt to create a product.
+  4.  Create a new endpoint, `GET /api/users`, which lists all users in the database.
+  5.  This new `/api/users` endpoint must be protected by both the authentication middleware (to ensure the user is logged in) and the new admin authorization middleware.
+  6.  For the purpose of testing, ensure there's a way to have an admin user. The provided solution will modify the database seed script to create one.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 35
+tags: ["feature", "authorization", "rbac", "security", "backend", "middleware"]
+prerequisites: ["add-jwt-authentication"]
+files_to_modify:
+  - "src/server/src/models/User.ts"
+  - "src/server/src/middleware/auth.ts"
+  - "src/server/src/controllers/userController.ts"
+  - "src/server/src/routes/userRoutes.ts"
+  - "src/server/src/index.ts"
+  - "src/server/src/routes/productRoutes.ts"
+  - "db/seed.js"
+success_criteria:
+  - "All new RBAC-related tests must pass."
+  - "A regular 'user' attempting to post a product receives a 403 Forbidden error."
+  - "An 'admin' user can successfully create a product."
+  - "A regular 'user' attempting to access `/api/users` receives a 403 Forbidden error."
+  - "An 'admin' user can successfully retrieve the list of all users from `/api/users`."
+  - "The user's role is correctly assigned upon registration and stored in the database."

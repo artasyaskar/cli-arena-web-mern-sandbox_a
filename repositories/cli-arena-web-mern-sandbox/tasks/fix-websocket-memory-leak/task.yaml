@@ -1,0 +1,23 @@
+id: fix-websocket-memory-leak
+title: "Fix Memory Leak in WebSocket Service"
+description: |
+  A new feature was added to the WebSocket server to handle internal system events using a global event bus. However, the implementation has a critical flaw: it creates a memory leak.
+
+  **The Bug:**
+  In `websockets.ts`, every time a new client connects, a listener is attached to a global `eventBus`. However, when the client disconnects, this listener is never removed. As more and more clients connect over time, the number of listeners on the event bus will grow indefinitely, consuming more and more memory until the server crashes.
+
+  **Your Task:**
+  Identify the source of the memory leak and fix it. You must ensure that all resources allocated for a client's session are properly cleaned up when the client disconnects.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 30
+tags: ["bug", "memory-leak", "websockets", "backend", "performance"]
+prerequisites: ["add-websocket-notifications"]
+files_to_modify:
+  - "src/server/src/websockets.ts"
+success_criteria:
+  - "The `memory.leak.test.ts` file must pass."
+  - "The number of listeners on the global `eventBus` must not grow as clients connect and disconnect."
+  - "The fix must be implemented in the `ws.on('close', ...)` event handler in `websockets.ts`."
+  - "Existing WebSocket functionality (like broadcasting new products) must remain unchanged."

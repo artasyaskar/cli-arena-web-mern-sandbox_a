@@ -1,0 +1,36 @@
+id: add-jwt-authentication
+title: "Implement User Authentication System"
+description: |
+  The application currently allows anyone to create new products. This task is to implement a JWT-based authentication system to protect the product creation endpoint. Users should be able to register, log in to receive a token, and use that token to perform protected actions.
+
+  **Requirements:**
+  1.  Create a `User` model with `email` and `password` fields.
+  2.  Passwords must be hashed using `bcryptjs` before being saved to the database.
+  3.  Create two new API endpoints:
+      - `POST /api/auth/register`: To create a new user.
+      - `POST /api/auth/login`: To authenticate a user and return a JWT.
+  4.  The JWT should contain the user's ID and expire in 24 hours. Use a secret key of 'supersecretjwtkey'.
+  5.  Create an authentication middleware that verifies the JWT from the `Authorization` header.
+  6.  Apply this middleware to the `POST /api/products` endpoint. The `GET /api/products` endpoint should remain public.
+  7.  Update the frontend to include basic registration and login forms. The JWT should be stored and sent with the request to create a product.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "medium"
+estimated_time: 45
+tags: ["feature", "authentication", "jwt", "security", "backend", "frontend"]
+prerequisites: []
+files_to_modify:
+  - /repo/src/server/src/models/User.ts
+  - /repo/src/server/src/middleware/auth.ts
+  - /repo/src/server/src/routes/authRoutes.ts
+  - /repo/src/server/src/index.ts
+  - /repo/src/server/src/routes/productRoutes.ts
+  - /repo/src/client/src/App.tsx
+  - /repo/src/server/package.json
+success_criteria:
+  - "All new authentication-related tests must pass."
+  - "The `POST /api/products` endpoint must return a 401 Unauthorized error for requests without a valid JWT."
+  - "Users can successfully register and log in."
+  - "A valid JWT is returned upon successful login."
+  - "Passwords are not stored in plaintext in the database."
+  - "The frontend allows users to register, log in, and create products when authenticated."

@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    working_dir: /app/server
+    ports:
+      - "8080:8080" # Backend API
+      - "3000:3000" # Vite dev server
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mern-sandbox
+      - PORT=8080
+      - CHOKIDAR_USEPOLLING=true # Helps with hot-reloading in Docker
+    depends_on:
+      - mongo
+    volumes:
+      # Mount source code for hot-reloading
+      - ./src/server:/app/server
+      - ./src/client:/app/client
+      # Use a named volume for node_modules to avoid overwriting them
+      # from the host's potentially empty folder
+      - server_node_modules:/app/server/node_modules
+      - client_node_modules:/app/client/node_modules
+    # The command starts the server in dev mode with hot-reloading.
+    command: npm run dev
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+    driver: local
+  server_node_modules:
+    driver: local
+  client_node_modules:
+    driver: local

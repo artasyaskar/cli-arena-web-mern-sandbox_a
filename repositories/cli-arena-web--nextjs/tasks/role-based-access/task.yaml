@@ -1,0 +1,49 @@
+id: role-based-access
+title: Role-Based Access Control (RBAC)
+description: |
+  Implement Role-Based Access Control (RBAC) in a Next.js application with JWT authentication.
+
+  **Requirements:**
+  1. Update the User model in Prisma schema to include a role field with values: USER, EDITOR, ADMIN.
+  2. Create middleware that checks JWT tokens and enforces role-based permissions.
+  3. Create a new API route at `/api/admin/data` that only allows ADMIN users.
+  4. Create a new API route at `/api/editor/data` that allows ADMIN and EDITOR users.
+  5. Create a new API route at `/api/user/data` that allows all authenticated users.
+  6. Update the signup API route to allow creating users with a specific role.
+  7. Update the login API route to include the user's role in the JWT token.
+  8. Implement role hierarchy: ADMIN > EDITOR > USER.
+  9. Return appropriate HTTP status codes (403 Forbidden) for unauthorized access.
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 45
+tags:
+  - nextjs
+  - rbac
+  - authorization
+  - jwt
+  - middleware
+  - prisma
+
+prerequisites:
+  - auth-jwt-refresh
+
+files_to_modify:
+  - prisma/schema.prisma
+  - src/middleware/rbac.ts
+  - src/pages/api/auth/signup.ts
+  - src/pages/api/auth/login.ts
+  - src/pages/api/admin/data.ts
+  - src/pages/api/editor/data.ts
+  - src/pages/api/user/data.ts
+
+success_criteria:
+  - The User model has a role field with USER, EDITOR, ADMIN values.
+  - RBAC middleware validates JWT tokens and checks user roles.
+  - The `/api/admin/data` route only allows ADMIN users.
+  - The `/api/editor/data` route allows ADMIN and EDITOR users.
+  - The `/api/user/data` route allows all authenticated users.
+  - Signup API allows creating users with specific roles.
+  - Login API includes user role in JWT token.
+  - Role hierarchy is properly enforced.
+  - Unauthorized access returns 403 Forbidden status.

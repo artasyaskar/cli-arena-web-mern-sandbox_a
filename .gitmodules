@@ -1,0 +1,6 @@
+[submodule "repositories/cli-arena-web--nextjs"]
+	path = repositories/cli-arena-web--nextjs
+	url = https://github.com/mateega/cli-arena-web--nextjs.git
+[submodule "repositories/cli-arena-web-mern-sandbox"]
+	path = repositories/cli-arena-web-mern-sandbox
+	url = https://github.com/mateega/cli-arena-web-mern-sandbox.git

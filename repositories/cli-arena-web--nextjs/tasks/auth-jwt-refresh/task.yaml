@@ -1,0 +1,52 @@
+id: auth-jwt-refresh
+title: User Authentication with JWT & Refresh Tokens
+description: |
+  Implement secure JWT-based authentication with refresh token rotation in a Next.js application.
+
+  **Requirements:**
+  1. Install bcryptjs, jsonwebtoken, and @prisma/client dependencies.
+  2. Add a RefreshToken model to the Prisma schema with id, token, userId, expiresAt, and createdAt fields.
+  3. Create a new API route at `/api/auth/signup` that creates new users with hashed passwords.
+  4. Create a new API route at `/api/auth/login` that validates credentials and returns JWT access and refresh tokens.
+  5. Create a new API route at `/api/auth/refresh` that exchanges refresh tokens for new access tokens.
+  6. Create a new API route at `/api/auth/logout` that invalidates refresh tokens.
+  7. Implement middleware that validates JWT tokens for protected routes.
+  8. The refresh token should have a longer expiration time than the access token.
+  9. Implement token rotation (new refresh token issued with each refresh).
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 60
+tags:
+  - nextjs
+  - jwt
+  - authentication
+  - refresh-tokens
+  - prisma
+  - bcrypt
+
+prerequisites:
+  - Basic knowledge of Next.js API routes
+  - Understanding of JWT tokens and authentication
+  - Familiarity with Prisma ORM
+  - Knowledge of password hashing and security
+
+files_to_modify:
+  - prisma/schema.prisma
+  - src/lib/auth.ts
+  - src/pages/api/auth/signup.ts
+  - src/pages/api/auth/login.ts
+  - src/pages/api/auth/refresh.ts
+  - src/pages/api/auth/logout.ts
+  - src/middleware/auth.ts
+
+success_criteria:
+  - The bcryptjs, jsonwebtoken, and @prisma/client dependencies are installed.
+  - The RefreshToken model is added to the Prisma schema with proper relations.
+  - The `/api/auth/signup` route creates users with hashed passwords.
+  - The `/api/auth/login` route validates credentials and returns JWT tokens.
+  - The `/api/auth/refresh` route exchanges refresh tokens for new access tokens.
+  - The `/api/auth/logout` route invalidates refresh tokens.
+  - Middleware validates JWT tokens for protected routes.
+  - Refresh tokens have longer expiration than access tokens.
+  - Token rotation is implemented (new refresh token with each refresh).

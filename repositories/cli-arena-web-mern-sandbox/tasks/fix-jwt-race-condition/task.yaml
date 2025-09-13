@@ -1,0 +1,23 @@
+id: fix-jwt-race-condition
+title: "Fix JWT Middleware Race Condition"
+description: |
+  A new logout feature has been added which invalidates tokens by marking a user as inactive. However, a subtle race condition exists in the `protect` middleware. If a user logs out at the exact same time they make a request to a protected endpoint, it's possible for the protected endpoint to execute successfully even though the user's token should have been invalidated.
+
+  **The Buggy Logic in `middleware/auth.ts`:**
+  The `protect` middleware correctly decodes the token, but then it checks the user's `isActive` status *before* an unrelated `await` operation. After the `await`, it calls `next()` without re-validating the user's status. If the user's `isActive` status was changed to `false` during that `await`, the middleware will incorrectly allow the request to proceed.
+
+  **Your Task:**
+  Identify and fix this race condition. The middleware must ensure that the user's status is valid for the entire duration of its execution, preventing unauthorized access.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 25
+tags: ["bug", "race-condition", "security", "jwt", "backend", "middleware"]
+prerequisites: ["add-jwt-authentication", "add-role-based-access-control"]
+files_to_modify:
+  - "src/server/src/middleware/auth.ts"
+success_criteria:
+  - "The new `race.condition.test.ts` must pass."
+  - "A request to a protected endpoint must fail with a 401 error if the user logs out while the request is in-flight within the middleware."
+  - "The fix should be implemented within the `protect` middleware function."
+  - "Existing authentication and authorization functionality must remain unchanged."

@@ -1,0 +1,28 @@
+id: fix-mongo-transaction-rollback
+title: "Fix Data Integrity with MongoDB Transactions"
+description: |
+  A stock management feature has been added to the checkout process. When a user checks out, the system should create `Purchase` records and also decrement the `stock` for each purchased product. However, these two operations are not performed atomically.
+
+  **The Bug:**
+  The current checkout logic first saves the new `Purchase` records to the database. Then, in a separate operation, it tries to decrement the stock from the `Product` documents. If the stock update fails (e.g., trying to buy more items than are in stock), the `Purchase` records are *not* rolled back. This leads to a critical data integrity issue: the system records a purchase for an item that was never actually dispensed.
+
+  **Your Task:**
+  Refactor the checkout logic to use MongoDB transactions to ensure that the entire operation is atomic. If any part of the process fails, the whole transaction must be rolled back, leaving the database in its original state.
+
+  **NOTE:** MongoDB transactions require a replica set configuration. The project's `docker-compose.yml` must be updated to run MongoDB in replica set mode for the tests to pass.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 50
+tags: ["bug", "database", "transactions", "mongodb", "backend", "data-integrity"]
+prerequisites: ["add-mock-payment-integration"]
+files_to_modify:
+  - "src/server/src/controllers/checkoutController.ts"
+  - "src/server/src/models/Product.ts"
+  - "docker-compose.yml"
+success_criteria:
+  - "The `transaction.test.ts` file must pass."
+  - "The checkout logic must be wrapped in a MongoDB transaction."
+  - "If a checkout operation fails midway (e.g., due to insufficient stock), any `Purchase` records that were created as part of the transaction must be rolled back."
+  - "A successful checkout should still correctly create purchase records and decrement stock."
+  - "The `docker-compose.yml` file is correctly configured to run MongoDB as a replica set."

@@ -1,0 +1,49 @@
+id: 03-i18n-nextjs
+title: Internationalization (i18n) Setup in Next.js
+description: |
+  Implement internationalization (i18n) in a Next.js application using next-i18next.
+
+  **Requirements:**
+  1. Install next-i18next, react-i18next, and i18next dependencies.
+  2. Create next-i18next.config.js configuration file.
+  3. Update next.config.js to include i18n configuration.
+  4. Create locale directories for English (en) and Spanish (es).
+  5. Create translation files (common.json) for both languages.
+  6. Update _app.tsx to wrap the app with appWithTranslation.
+  7. Create a sample page that demonstrates language switching.
+  8. Implement a language switcher component.
+  9. Configure API routes to support localized responses.
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 30
+tags:
+  - nextjs
+  - i18n
+  - internationalization
+  - next-i18next
+  - react-i18next
+  - localization
+
+prerequisites:
+  - Basic knowledge of Next.js
+  - Understanding of React hooks
+
+files_to_modify:
+  - next-i18next.config.js
+  - next.config.js
+  - src/pages/_app.tsx
+  - src/pages/index.tsx
+  - src/pages/api/hello.ts
+  - src/locales/en/common.json
+  - src/locales/es/common.json
+
+success_criteria:
+  - The next-i18next, react-i18next, and i18next dependencies are installed.
+  - The next-i18next.config.js file is properly configured.
+  - The next.config.js includes i18n configuration.
+  - Locale directories and translation files exist for English and Spanish.
+  - The _app.tsx file wraps the app with appWithTranslation.
+  - The index.tsx page demonstrates language switching functionality.
+  - A language switcher component is implemented.
+  - API routes return localized responses based on locale parameter.

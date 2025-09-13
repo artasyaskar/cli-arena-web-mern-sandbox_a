@@ -1,0 +1,46 @@
+id: 09-image-upload-cloudinary
+title: Image Upload with Cloudinary in Next.js
+description: |
+  Implement image upload functionality in a Next.js application using Cloudinary.
+
+  **Requirements:**
+  1. Install cloudinary and multer dependencies.
+  2. Create environment variables for Cloudinary credentials.
+  3. Create a new API route at `/api/upload` that handles file uploads.
+  4. The upload handler should validate file types (JPEG, PNG, GIF, WebP).
+  5. The handler should validate file size (max 5MB).
+  6. The handler should upload the file to Cloudinary with image transformations.
+  7. The handler should return the Cloudinary URL and metadata on success.
+  8. The handler should return appropriate error messages for validation failures.
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 40
+tags:
+  - nextjs
+  - cloudinary
+  - image-upload
+  - file-upload
+  - api-routes
+  - ui-components
+
+prerequisites:
+  - Basic knowledge of Next.js API routes
+  - Understanding of file uploads and form handling
+  - Familiarity with environment variables
+  - Knowledge of Cloudinary or similar cloud services
+
+files_to_modify:
+  - .env.local
+  - src/pages/api/upload.ts
+  - package.json
+
+success_criteria:
+  - The cloudinary and multer dependencies are installed.
+  - Environment variables for Cloudinary credentials are configured.
+  - The `/api/upload` route handles file uploads correctly.
+  - File type validation works for allowed image formats.
+  - File size validation works with a 5MB limit.
+  - Files are uploaded to Cloudinary with transformations.
+  - The API returns the Cloudinary URL and metadata on success.
+  - Appropriate error messages are returned for validation failures.

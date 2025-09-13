@@ -1,0 +1,162 @@
+{
+  "version": "1.0",
+  "repository": "cli-arena-web-mern-sandbox",
+  "total_tasks": 15,
+  "categories": {
+    "feature_development": [
+      "add-jwt-authentication",
+      "add-role-based-access-control",
+      "add-full-text-search",
+      "add-websocket-notifications",
+      "add-file-upload-s3",
+      "add-mock-payment-integration"
+    ],
+    "bug_fixes": [
+      "fix-jwt-race-condition",
+      "fix-websocket-memory-leak",
+      "fix-mongo-transaction-rollback"
+    ],
+    "refactoring": [
+      "refactor-layered-architecture",
+      "optimize-mongo-queries",
+      "refactor-react-components"
+    ],
+    "testing": [
+      "add-e2e-tests-cypress"
+    ],
+    "devops": [
+      "devops-docker-healthcheck"
+    ],
+    "security": [
+        "add-security-enhancements"
+    ]
+  },
+  "difficulty_distribution": {
+    "easy": 0,
+    "medium": 4,
+    "hard": 11
+  },
+  "estimated_total_time": 660,
+  "tasks": [
+    {
+      "id": "add-jwt-authentication",
+      "title": "Implement User Authentication System",
+      "difficulty": "medium",
+      "estimated_time": 45,
+      "category": "feature_development",
+      "tags": ["feature", "authentication", "jwt", "security", "backend", "frontend"]
+    },
+    {
+      "id": "add-role-based-access-control",
+      "title": "Add Role-Based Access Control (RBAC)",
+      "difficulty": "hard",
+      "estimated_time": 35,
+      "category": "feature_development",
+      "tags": ["feature", "authorization", "rbac", "security", "backend", "middleware"]
+    },
+    {
+      "id": "fix-jwt-race-condition",
+      "title": "Fix JWT Middleware Race Condition",
+      "difficulty": "hard",
+      "estimated_time": 25,
+      "category": "bug_fixes",
+      "tags": ["bug", "race-condition", "security", "jwt", "backend", "middleware"]
+    },
+    {
+      "id": "add-security-enhancements",
+      "title": "Harden API with Security Best Practices",
+      "difficulty": "medium",
+      "estimated_time": 40,
+      "category": "security",
+      "tags": ["security", "helmet", "rate-limit", "validation", "backend"]
+    },
+    {
+      "id": "refactor-layered-architecture",
+      "title": "Refactor Backend to a Layered Architecture",
+      "difficulty": "medium",
+      "estimated_time": 50,
+      "category": "refactoring",
+      "tags": ["refactor", "architecture", "backend", "SOLID"]
+    },
+    {
+      "id": "add-full-text-search",
+      "title": "Implement Full-Text Search for Products",
+      "difficulty": "medium",
+      "estimated_time": 40,
+      "category": "feature_development",
+      "tags": ["feature", "search", "mongodb", "backend", "frontend"]
+    },
+    {
+      "id": "optimize-mongo-queries",
+      "title": "Optimize Product Query with Aggregation Pipeline",
+      "difficulty": "hard",
+      "estimated_time": 40,
+      "category": "refactoring",
+      "tags": ["refactor", "performance", "mongodb", "aggregation", "backend"]
+    },
+    {
+      "id": "add-websocket-notifications",
+      "title": "Implement Real-Time Product Notifications via WebSockets",
+      "difficulty": "hard",
+      "estimated_time": 50,
+      "category": "feature_development",
+      "tags": ["feature", "websockets", "real-time", "backend", "frontend"]
+    },
+    {
+      "id": "fix-websocket-memory-leak",
+      "title": "Fix Memory Leak in WebSocket Service",
+      "difficulty": "hard",
+      "estimated_time": 30,
+      "category": "bug_fixes",
+      "tags": ["bug", "memory-leak", "websockets", "backend", "performance"]
+    },
+    {
+      "id": "add-file-upload-s3",
+      "title": "Implement Product Image Upload",
+      "difficulty": "hard",
+      "estimated_time": 55,
+      "category": "feature_development",
+      "tags": ["feature", "file-upload", "multer", "backend", "frontend"]
+    },
+    {
+      "id": "refactor-react-components",
+      "title": "Refactor Frontend into Reusable React Components",
+      "difficulty": "medium",
+      "estimated_time": 45,
+      "category": "refactoring",
+      "tags": ["refactor", "frontend", "react", "components"]
+    },
+    {
+      "id": "add-mock-payment-integration",
+      "title": "Integrate a Mock Payment Gateway for Checkout",
+      "difficulty": "hard",
+      "estimated_time": 60,
+      "category": "feature_development",
+      "tags": ["feature", "payments", "checkout", "mock", "backend", "frontend"]
+    },
+    {
+      "id": "add-e2e-tests-cypress",
+      "title": "Add End-to-End (E2E) Tests with Cypress",
+      "difficulty": "hard",
+      "estimated_time": 50,
+      "category": "testing",
+      "tags": ["testing", "e2e", "cypress", "frontend", "devops"]
+    },
+    {
+      "id": "fix-mongo-transaction-rollback",
+      "title": "Fix Data Integrity with MongoDB Transactions",
+      "difficulty": "hard",
+      "estimated_time": 50,
+      "category": "bug_fixes",
+      "tags": ["bug", "database", "transactions", "mongodb", "backend", "data-integrity"]
+    },
+    {
+      "id": "devops-docker-healthcheck",
+      "title": "Improve Docker Compose Robustness with Healthchecks",
+      "difficulty": "hard",
+      "estimated_time": 35,
+      "category": "devops",
+      "tags": ["devops", "docker", "docker-compose", "healthcheck"]
+    }
+  ]
+}

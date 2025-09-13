@@ -1,0 +1,37 @@
+id: add-mock-payment-integration
+title: "Integrate a Mock Payment Gateway for Checkout"
+description: |
+  To complete the application's e-commerce flow, we need a checkout and payment system. This task involves simulating an integration with a Stripe-like payment gateway.
+
+  **Backend Requirements:**
+  1.  Create a new endpoint: `POST /api/checkout/session`.
+  2.  The endpoint should be protected and require authentication.
+  3.  It should accept a payload containing an array of product IDs (`items`) and a `paymentToken` string.
+  4.  **Mock Logic:**
+      - If the `paymentToken` is exactly `"tok_mock_success"`, the server should create new documents in the `purchases` collection for each item, linking them to the authenticated user. It should then return a `200 OK` with a success message.
+      - If the `paymentToken` is `"tok_mock_fail"`, the server should do nothing and return a `400 Bad Request` with a "Payment failed" message.
+      - Any other token should also result in a `400 Bad Request`.
+
+  **Frontend Requirements:**
+  1.  Implement a client-side "shopping cart" state.
+  2.  Add "Add to Cart" buttons to the product listings.
+  3.  Create a new "Cart" view that displays the items in the cart, calculates the total price, and has a "Checkout" button.
+  4.  The checkout process should allow the user to simulate a successful or failed payment, which then calls the backend with the appropriate mock token.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 60
+tags: ["feature", "payments", "checkout", "mock", "backend", "frontend"]
+prerequisites: ["refactor-react-components"]
+files_to_modify:
+  - /repo/src/server/src/controllers/checkoutController.ts
+  - /repo/src/server/src/routes/checkoutRoutes.ts
+  - /repo/src/server/src/index.ts
+  - /repo/src/client/src/App.tsx
+  - /repo/src/client/src/components/CartView.tsx
+success_criteria:
+  - "The `payment.test.ts` file must pass."
+  - "POSTing to `/api/checkout/session` with a 'success' token creates the correct `Purchase` documents in the database."
+  - "POSTing to `/api/checkout/session` with a 'fail' token returns a 400 status code and does not create any purchase documents."
+  - "The endpoint must be protected, returning 401 for unauthenticated requests."
+  - "The frontend has a working cart and a checkout flow that interacts with the new endpoint."

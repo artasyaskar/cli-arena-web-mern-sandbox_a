@@ -1,0 +1,64 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: cli-arena-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cli_arena
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cli-arena-network
+
+  # Next.js Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cli-arena-app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/cli_arena
+      - NEXTAUTH_SECRET=your-secret-key-here
+      - NEXTAUTH_URL=http://localhost:3000
+    depends_on:
+      - postgres
+    networks:
+      - cli-arena-network
+    volumes:
+      - ./prisma:/app/prisma
+      - ./src:/app/src
+
+  # Prisma Studio (Optional - for database management)
+  prisma-studio:
+    image: node:18-alpine
+    container_name: cli-arena-prisma-studio
+    working_dir: /app
+    command: >
+      sh -c "npm install -g prisma &&
+             prisma studio --hostname 0.0.0.0 --port 5555"
+    ports:
+      - '5555:5555'
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/cli_arena
+    depends_on:
+      - postgres
+    networks:
+      - cli-arena-network
+    volumes:
+      - ./prisma:/app/prisma
+
+volumes:
+  postgres_data:
+
+networks:
+  cli-arena-network:
+    driver: bridge

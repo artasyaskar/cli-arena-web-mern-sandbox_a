@@ -1,0 +1,46 @@
+id: 06-rest-api-prisma
+title: REST API with Prisma ORM
+description: |
+  Create a complete REST API using Next.js and Prisma ORM with full CRUD operations.
+
+  **Requirements:**
+  1. Install Prisma and @prisma/client dependencies.
+  2. Create a Prisma schema with a Post model (id, title, content, published, createdAt, updatedAt).
+  3. Create an API route at `/api/posts` for GET (fetch all) and POST (create) operations.
+  4. Create an API route at `/api/posts/[id]` for GET (fetch by ID), PUT (update), and DELETE operations.
+  5. Implement proper error handling for all endpoints.
+  6. Return appropriate HTTP status codes (200, 201, 400, 404, 405, 500).
+  7. Validate required fields in POST and PUT requests.
+  8. Handle Prisma-specific errors (e.g., record not found).
+  9. Create a seed script to populate the database with sample data.
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 45
+tags:
+  - nextjs
+  - prisma
+  - rest-api
+  - crud
+  - database
+  - orm
+
+prerequisites:
+  - Basic knowledge of Next.js API routes
+  - Understanding of REST API principles
+  - Familiarity with Prisma ORM
+
+files_to_modify:
+  - prisma/schema.prisma
+  - src/pages/api/posts/index.ts
+  - src/pages/api/posts/[id].ts
+  - scripts/seed.ts
+
+success_criteria:
+  - The Prisma schema includes a Post model with all required fields.
+  - The `/api/posts` route handles GET and POST requests correctly.
+  - The `/api/posts/[id]` route handles GET, PUT, and DELETE requests correctly.
+  - All endpoints return appropriate HTTP status codes.
+  - Error handling is implemented for validation and database errors.
+  - The seed script creates sample posts in the database.
+  - Prisma client is properly generated and configured.

@@ -1,0 +1,35 @@
+id: add-full-text-search
+title: "Implement Full-Text Search for Products"
+description: |
+  To improve user experience, the application needs a search feature. This task is to implement a full-text search API for products and integrate it into the frontend.
+
+  **Backend Requirements:**
+  1.  Modify the `Product` schema in `src/server/src/models/Product.ts` to include a text index on the `name` and `description` fields.
+  2.  Create a new API endpoint: `GET /api/products/search`.
+  3.  This endpoint should accept a query parameter `q` (e.g., `/api/products/search?q=my-query`).
+  4.  The endpoint's logic should use MongoDB's `$text` operator to search against the indexed fields.
+  5.  The search results must be sorted by relevance (i.e., the `textScore`).
+
+  **Frontend Requirements:**
+  1.  Add a search input bar to the main application UI.
+  2.  When a user types in the search bar, the frontend should make a request to the new search endpoint.
+  3.  The product list displayed to the user should dynamically update to show the search results. A message should be shown if no results are found.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "medium"
+estimated_time: 40
+tags: ["feature", "search", "mongodb", "backend", "frontend"]
+prerequisites: ["refactor-layered-architecture"]
+files_to_modify:
+  - /repo/src/server/src/models/Product.ts
+  - /repo/src/server/src/routes/productRoutes.ts
+  - /repo/src/server/src/controllers/productController.ts
+  - /repo/src/server/src/services/productService.ts
+  - /repo/src/server/src/repositories/productRepository.ts
+  - /repo/src/client/src/App.tsx
+success_criteria:
+  - "The new `search.test.ts` file must pass."
+  - "A `GET` request to `/api/products/search?q=...` returns a list of products matching the query."
+  - "The search results are correctly sorted by relevance."
+  - "The frontend displays a search bar and dynamically updates the product list based on the search query."
+  - "If no products match the search, the frontend displays an appropriate message."

@@ -1,0 +1,41 @@
+id: 11-job-queue
+title: Background Job Queue with In-Memory Storage
+description: |
+  Implement a simple background job queue in Next.js using in-memory storage.
+
+  **Requirements:**
+  1. Create an in-memory job queue using Map or Array for storing jobs.
+  2. Create an API route at `/api/enqueue` that accepts POST requests with JSON payload `{ "task": "some-task" }`.
+  3. The enqueue endpoint should return `{ "id": <jobId> }` with a unique job identifier.
+  4. Create an API route at `/api/status?id=<jobId>` that returns `{ "status": "pending" | "completed" }`.
+  5. Implement a background worker that automatically completes jobs after 3 seconds.
+  6. Jobs should be stored with initial status `pending`.
+  7. Jobs should automatically change status to `completed` after 3 seconds.
+  8. Handle cases where job ID is not found (return appropriate error).
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 30
+tags:
+  - nextjs
+  - job-queue
+  - background-jobs
+  - api
+  - in-memory
+
+prerequisites:
+  - Basic knowledge of Next.js API routes
+  - Understanding of asynchronous programming
+
+files_to_modify:
+  - src/lib/jobQueue.ts
+  - src/pages/api/enqueue.ts
+  - src/pages/api/status.ts
+
+success_criteria:
+  - The in-memory job queue is implemented with Map or Array storage.
+  - The `/api/enqueue` route accepts POST requests and returns job IDs.
+  - The `/api/status` route returns job status (pending/completed).
+  - Background worker automatically completes jobs after 3 seconds.
+  - Jobs start with "pending" status and change to "completed".
+  - Error handling for non-existent job IDs is implemented.

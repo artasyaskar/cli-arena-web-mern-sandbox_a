@@ -1,0 +1,29 @@
+id: devops-docker-healthcheck
+title: "Improve Docker Compose Robustness with Healthchecks"
+description: |
+  The application stack launches multiple services, but the `api` service might try to start before its dependencies (`mongo`) are fully ready, leading to startup race conditions. This task is to improve the robustness of the Docker setup by adding healthchecks and a wait script.
+
+  **Requirements:**
+  1.  **Add a New Service:** Add a new `redis` service to the `docker-compose.yml` file using the official `redis:alpine` image.
+  2.  **Implement Healthchecks:**
+      - Add a `healthcheck` to the `mongo` service to ensure it's ready to accept connections. (The previous task already added one, but this task requires verifying and potentially improving it).
+      - Add a `healthcheck` to the new `redis` service (e.g., using `redis-cli ping`).
+  3.  **Control Startup Order:**
+      - The `api` service must explicitly `depend_on` both the `mongo` and `redis` services.
+      - Modify the `api` service's `command` to use a wait script (e.g., `wait-for-it.sh` or a custom script) that waits for both `mongo` and `redis` to be healthy on their respective ports before starting the Node.js application.
+  4.  **Create a Wait Script:** Create a new shell script `scripts/wait-for-services.sh` that can poll TCP ports until they are open.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "medium"
+estimated_time: 35
+tags: ["devops", "docker", "docker-compose", "healthcheck"]
+prerequisites: ["fix-mongo-transaction-rollback"]
+files_to_modify:
+  - "docker-compose.yml"
+  - "scripts/wait-for-services.sh"
+success_criteria:
+  - "The `docker.setup.test.sh` script must pass."
+  - "The `docker-compose.yml` file contains a new `redis` service."
+  - "The `mongo` and `redis` services both have a `healthcheck` configuration."
+  - "The `api` service uses a wait script in its `command` to delay startup until dependencies are healthy."
+  - "The `scripts/wait-for-services.sh` script is created and is executable."

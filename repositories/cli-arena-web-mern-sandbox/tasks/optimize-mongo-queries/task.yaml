@@ -1,0 +1,28 @@
+id: optimize-mongo-queries
+title: "Optimize Product Query with Aggregation Pipeline"
+description: |
+  A new feature has been added to show how many times each product has been "purchased". However, the current implementation is highly inefficient, suffering from the "N+1 query problem". It fetches all products and then runs a separate database query for *each* product to count its purchases. This will not scale.
+
+  **Your Task:**
+  Refactor the data access logic for fetching all products to be highly efficient. You must use a single MongoDB aggregation pipeline to achieve this.
+
+  **Requirements:**
+  1.  Examine the `productRepository.ts` and `productService.ts` files to understand the current inefficient implementation.
+  2.  Modify the `findAll` method in `productRepository.ts` to use an aggregation pipeline.
+  3.  The pipeline must use the `$lookup` stage to join the `products` collection with the `purchases` collection.
+  4.  The pipeline must use stages like `$addFields` or `$group` to calculate the `purchaseCount` for each product.
+  5.  The final output structure from the `GET /api/products` endpoint (a list of products, each with a `purchaseCount` field) must remain the same.
+  6.  The new implementation must be significantly more performant and make only a single call to the database to fetch all required data.
+
+author_email: "artasyakar@gmail.com"
+difficulty: "hard"
+estimated_time: 40
+tags: ["refactor", "performance", "mongodb", "aggregation", "backend"]
+prerequisites: ["add-full-text-search"]
+files_to_modify:
+  - "src/server/src/repositories/productRepository.ts"
+success_criteria:
+  - "The `aggregation.test.ts` file must pass."
+  - "The `GET /api/products` endpoint must return the correct `purchaseCount` for each product."
+  - "The performance assertion in the test, which checks for query execution time, must pass."
+  - "The solution must be implemented using a single aggregation pipeline in the `productRepository`."

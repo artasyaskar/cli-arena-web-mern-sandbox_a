@@ -1,0 +1,37 @@
+id: add-e2e-tests-cypress
+title: "Add End-to-End (E2E) Tests with Cypress"
+description: |
+  The project currently relies on backend API tests. To ensure the frontend and backend work together correctly from a user's perspective, we need to add End-to-End (E2E) tests. This task is to set up Cypress and create two critical E2E tests.
+
+  **Requirements:**
+  1.  **Setup Cypress:**
+      - Add `cypress` as a dev dependency to the `src/client/package.json` file.
+      - Create a `cypress.config.ts` file in the project root. Configure the `e2e.baseUrl` to point to the frontend development server (`http://localhost:3000`).
+      - Add a new script to `client/package.json` for running cypress: `"e2e": "cypress open"`.
+  2.  **Create Login Test:**
+      - Create a new test file: `cypress/e2e/login.cy.ts`.
+      - This test should visit the home page, navigate to the login form, enter credentials for a pre-existing user, submit the form, and assert that the user is successfully logged in (e.g., by checking for the visibility of a "Logout" button).
+  3.  **Create Checkout Test:**
+      - Create a new test file: `cypress/e2e/checkout.cy.ts`.
+      - This test should cover the full "happy path" for a user checking out:
+        - Programmatically log in (using `cy.request` or a custom command for speed and reliability).
+        - Add a product to the cart.
+        - Navigate to the cart.
+        - Click the button to simulate a successful payment.
+        - Assert that a success confirmation is visible.
+
+author_email: "artasyaskar@gmail.com"
+difficulty: "hard"
+estimated_time: 50
+tags: ["testing", "e2e", "cypress", "frontend", "devops"]
+prerequisites: ["add-mock-payment-integration"]
+files_to_modify:
+  - "src/client/package.json"
+  - "cypress.config.ts"
+  - "cypress/e2e/login.cy.ts"
+  - "cypress/e2e/checkout.cy.ts"
+success_criteria:
+  - "Cypress is added as a dependency and configured correctly."
+  - "The `login.cy.ts` test successfully runs and passes."
+  - "The `checkout.cy.ts` test successfully runs and passes."
+  - "The E2E tests must run in a CI/CD environment, which implies they need to be runnable headlessly (e.g., via `cypress run`)."

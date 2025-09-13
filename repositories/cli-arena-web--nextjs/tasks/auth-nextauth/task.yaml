@@ -1,0 +1,49 @@
+id: 04-auth-nextauth
+title: NextAuth.js Authentication with GitHub
+description: |
+  Implement authentication in a Next.js application using NextAuth.js with GitHub as the provider.
+
+  **Requirements:**
+  1. Install next-auth and @next-auth/prisma-adapter dependencies.
+  2. Create environment variables for NextAuth configuration.
+  3. Create the NextAuth API route at `/api/auth/[...nextauth].ts`.
+  4. Configure GitHub as the authentication provider.
+  5. Set up Prisma adapter for session management.
+  6. Implement JWT session strategy.
+  7. Create callback functions for sign-in and session handling.
+  8. Update _app.tsx to wrap the app with SessionProvider.
+  9. Create API routes for session management and logout.
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 45
+tags:
+  - nextjs
+  - nextauth
+  - authentication
+  - github
+  - oauth
+  - prisma
+
+prerequisites:
+  - Basic knowledge of Next.js
+  - Understanding of OAuth authentication
+
+files_to_modify:
+  - .env.local
+  - src/pages/api/auth/[...nextauth].ts
+  - src/pages/_app.tsx
+  - src/pages/api/session.ts
+  - src/pages/api/protected.ts
+  - src/pages/api/logout.ts
+
+success_criteria:
+  - The next-auth and @next-auth/prisma-adapter dependencies are installed.
+  - Environment variables for NextAuth are properly configured.
+  - The NextAuth API route is created and accessible.
+  - GitHub provider is configured in NextAuth.
+  - Prisma adapter is set up for session management.
+  - JWT session strategy is implemented.
+  - Callback functions handle sign-in and session properly.
+  - The app is wrapped with SessionProvider in _app.tsx.
+  - API routes for session management and logout are functional.

@@ -1,0 +1,47 @@
+id: task-09-seo-setup
+title: SEO Setup in Next.js with next-seo
+description: |
+  Set up SEO support in a Next.js application using the next-seo package.
+
+  **Requirements:**
+  1. Install next-seo dependency.
+  2. Create next-seo.config.js with default SEO configuration.
+  3. Update _app.tsx to wrap the app with DefaultSeo.
+  4. Create a page that uses NextSeo for page-specific SEO overrides.
+  5. Configure Open Graph meta tags for social media sharing.
+  6. Configure Twitter Card meta tags for Twitter sharing.
+  7. Add additional meta tags (viewport, theme-color, etc.).
+  8. Create additional pages with different SEO configurations.
+
+author_email: admin@cli-arena.com
+difficulty: medium
+estimated_time: 30
+tags:
+  - nextjs
+  - seo
+  - next-seo
+  - meta-tags
+  - open-graph
+  - twitter-cards
+
+prerequisites:
+  - Basic knowledge of Next.js
+  - Understanding of SEO principles
+
+files_to_modify:
+  - next-seo.config.js
+  - src/pages/_app.tsx
+  - src/pages/index.tsx
+  - src/pages/about.tsx
+  - src/pages/contact.tsx
+  - scripts/seo-demo.js
+
+success_criteria:
+  - The next-seo dependency is installed and configured.
+  - The next-seo.config.js file contains default SEO settings.
+  - The _app.tsx file wraps the app with DefaultSeo.
+  - The index page uses NextSeo for page-specific overrides.
+  - Open Graph meta tags are properly configured.
+  - Twitter Card meta tags are properly configured.
+  - Additional meta tags are included (viewport, theme-color).
+  - Multiple pages demonstrate different SEO configurations.

@@ -1,0 +1,337 @@
+{
+  "version": "1.0",
+  "repository": "cli-arena-web-nextjs",
+  "total_tasks": 10,
+  "categories": {
+    "feature_development": ["hello-world"],
+    "bug_fixes": [],
+    "refactoring": [],
+    "testing": [],
+    "devops": [],
+    "authentication": [
+      "auth-jwt-refresh",
+      "role-based-access",
+      "04-auth-nextauth"
+    ],
+    "authorization": ["role-based-access"],
+    "frontend": ["03-i18n-nextjs"],
+    "database": [],
+    "api_development": [
+      "auth-jwt-refresh",
+      "role-based-access",
+      "nextjs-rate-limiting",
+      "06-rest-api-prisma"
+    ],
+    "configuration": ["task-08-env-variables"],
+    "seo": ["task-09-seo-setup"],
+    "file_upload": ["09-image-upload-cloudinary"]
+  },
+  "difficulty_distribution": {
+    "easy": 2,
+    "medium": 7,
+    "hard": 1
+  },
+  "estimated_total_time": 360,
+  "tasks": [
+    {
+      "id": "auth-jwt-refresh",
+      "title": "User Authentication with JWT & Refresh Tokens",
+      "difficulty": "medium",
+      "estimated_time": 60,
+      "category": "authentication",
+      "tags": [
+        "authentication",
+        "jwt",
+        "refresh-tokens",
+        "security",
+        "middleware",
+        "api",
+        "nextjs"
+      ],
+      "description": "Implement secure JWT-based authentication with refresh token rotation in a Next.js application",
+      "files_to_modify": [
+        "src/pages/api/auth/signup.ts",
+        "src/pages/api/auth/login.ts",
+        "src/pages/api/auth/refresh.ts",
+        "src/pages/api/auth/logout.ts",
+        "src/middleware/auth.ts",
+        "src/pages/login.tsx",
+        "src/pages/dashboard.tsx",
+        "prisma/schema.prisma",
+        "tests/auth-jwt-refresh.test.ts"
+      ],
+      "success_criteria": [
+        "User can register with email and password",
+        "User can login and receive access + refresh tokens",
+        "Access tokens expire after 15 minutes",
+        "Refresh tokens work to get new access tokens",
+        "Middleware blocks access to protected routes without valid JWT",
+        "Logout clears all tokens properly",
+        "Login page shows user info when authenticated",
+        "All API endpoints return appropriate HTTP status codes",
+        "Passwords are properly hashed with bcrypt",
+        "Refresh tokens are stored securely in database"
+      ]
+    },
+    {
+      "id": "role-based-access",
+      "title": "Role-Based Access Control (RBAC)",
+      "difficulty": "medium",
+      "estimated_time": 45,
+      "category": "authorization",
+      "tags": [
+        "rbac",
+        "authentication",
+        "authorization",
+        "middleware",
+        "roles",
+        "security",
+        "api",
+        "nextjs"
+      ],
+      "description": "Implement comprehensive role-based access control (RBAC) in a Next.js application with JWT authentication",
+      "files_to_modify": [
+        "prisma/schema.prisma",
+        "src/lib/auth.ts",
+        "src/middleware/rbac.ts",
+        "src/pages/api/auth/signup.ts",
+        "src/pages/api/auth/login.ts",
+        "src/pages/api/admin/data.ts",
+        "src/pages/api/editor/data.ts",
+        "src/pages/api/user/data.ts",
+        "src/pages/admin.tsx",
+        "src/pages/editor.tsx",
+        "src/pages/user.tsx",
+        "tests/role-based-access.test.ts"
+      ],
+      "success_criteria": [
+        "User roles are properly stored in database",
+        "JWT tokens contain user role information",
+        "Middleware correctly enforces role-based access control",
+        "Admin-only routes are protected from non-admin users",
+        "Editor routes are accessible to both admin and editor roles",
+        "User routes are accessible to all authenticated users",
+        "Role-specific pages show appropriate content",
+        "Unauthorized access returns proper HTTP status codes (403)",
+        "Role hierarchy is properly implemented (admin > editor > user)",
+        "All API endpoints validate user permissions before processing requests"
+      ]
+    },
+    {
+      "id": "i18n-nextjs",
+      "title": "Internationalization (i18n) with Next.js",
+      "difficulty": "medium",
+      "estimated_time": 30,
+      "category": "frontend",
+      "tags": [
+        "nextjs",
+        "i18n",
+        "internationalization",
+        "localization",
+        "frontend",
+        "react"
+      ],
+      "description": "Implement internationalization (i18n) in a Next.js project using next-i18next for multilingual support",
+      "files_to_modify": [
+        "next.config.js",
+        "package.json",
+        "src/pages/_app.tsx",
+        "src/pages/index.tsx",
+        "src/locales/en/common.json",
+        "src/locales/es/common.json",
+        "next-i18next.config.js"
+      ],
+      "success_criteria": [
+        "Next.js project is properly configured with i18n support",
+        "next-i18next and react-i18next dependencies are installed",
+        "Translation files exist for English and Spanish",
+        "Sample page displays localized content",
+        "Language switching functionality works correctly",
+        "All tests pass successfully"
+      ]
+    },
+    {
+      "id": "auth-nextauth",
+      "title": "Authentication with NextAuth.js and GitHub",
+      "difficulty": "medium",
+      "estimated_time": 45,
+      "category": "authentication",
+      "tags": [
+        "nextjs",
+        "nextauth",
+        "authentication",
+        "oauth",
+        "github",
+        "frontend",
+        "react"
+      ],
+      "description": "Implement authentication in a Next.js project using NextAuth.js with GitHub as the OAuth provider",
+      "files_to_modify": [
+        "package.json",
+        "next.config.js",
+        "src/pages/api/auth/[...nextauth].ts",
+        "src/pages/_app.tsx",
+        "src/pages/index.tsx",
+        "src/pages/protected.tsx",
+        "src/pages/login.tsx",
+        ".env.local"
+      ],
+      "success_criteria": [
+        "NextAuth.js is properly configured with GitHub provider",
+        "Authentication API route exists and is functional",
+        "Users can login with GitHub OAuth",
+        "Protected routes redirect unauthenticated users to login",
+        "Session management works correctly",
+        "Logout functionality is implemented",
+        "All tests pass successfully"
+      ]
+    },
+    {
+      "id": "nextjs-rate-limiting",
+      "title": "Implement API Rate Limiting in Next.js",
+      "difficulty": "hard",
+      "estimated_time": 30,
+      "category": "api_development",
+      "tags": [
+        "nextjs",
+        "api",
+        "rate-limiting",
+        "middleware",
+        "security",
+        "backend"
+      ],
+      "description": "Add a Next.js API endpoint with rate limiting logic to restrict excessive client requests",
+      "files_to_modify": ["src/pages/api/limited.ts", "src/lib/rateLimit.ts"],
+      "success_criteria": [
+        "API endpoint responds correctly to valid requests",
+        "Rate limiting allows exactly 5 requests per minute per IP",
+        "Rate limit exceeded returns proper 429 status code",
+        "In-memory storage works without external dependencies",
+        "All tests pass successfully"
+      ]
+    },
+    {
+      "id": "rest-api-prisma",
+      "title": "REST API with Prisma in Next.js",
+      "difficulty": "intermediate",
+      "estimated_time": 45,
+      "category": "api_development",
+      "tags": ["nextjs", "prisma", "rest-api", "crud", "database", "backend"],
+      "description": "Implement a complete REST API using Prisma ORM in a Next.js application",
+      "files_to_modify": [
+        "prisma/schema.prisma",
+        "src/pages/api/posts/index.ts",
+        "src/pages/api/posts/[id].ts",
+        "scripts/seed.ts"
+      ],
+      "success_criteria": [
+        "Prisma schema is properly configured with Post model",
+        "All CRUD endpoints work correctly (GET, POST, PUT, DELETE)",
+        "Proper HTTP status codes are returned",
+        "Database operations are handled with error handling",
+        "All tests pass successfully"
+      ]
+    },
+    {
+      "id": "env-variables",
+      "title": "Environment Variable Management with dotenv",
+      "difficulty": "easy",
+      "estimated_time": 20,
+      "category": "configuration",
+      "tags": [
+        "nextjs",
+        "dotenv",
+        "environment-variables",
+        "configuration",
+        "setup"
+      ],
+      "description": "Set up environment variable management in a Next.js application using the dotenv package",
+      "files_to_modify": [
+        ".env",
+        ".env.example",
+        "next.config.js",
+        "src/pages/index.tsx",
+        "package.json"
+      ],
+      "success_criteria": [
+        "dotenv package is installed and configured",
+        ".env file exists with sample environment variables",
+        "Environment variables are accessible in server-side code",
+        "Environment variables are accessible in client-side code (where exposed)",
+        "Next.js configuration properly handles environment variables",
+        "Sample page demonstrates environment variable usage",
+        "All tests pass successfully"
+      ]
+    },
+    {
+      "id": "seo-setup",
+      "title": "SEO Setup in Next.js with next-seo",
+      "difficulty": "medium",
+      "estimated_time": 30,
+      "category": "seo",
+      "tags": [
+        "nextjs",
+        "seo",
+        "next-seo",
+        "meta-tags",
+        "open-graph",
+        "social-media"
+      ],
+      "description": "Set up SEO support in a Next.js application using the next-seo package",
+      "files_to_modify": [
+        "next-seo.config.js",
+        "src/pages/_app.tsx",
+        "src/pages/index.tsx",
+        "package.json"
+      ],
+      "success_criteria": [
+        "next-seo package is installed and configured",
+        "next-seo.config.js exists with proper SEO settings",
+        "DefaultSeo is properly configured in _app.tsx",
+        "Page-specific SEO overrides work correctly",
+        "Open Graph tags are properly set up",
+        "Meta tags are correctly structured",
+        "All tests pass successfully"
+      ]
+    },
+    {
+      "id": "image-upload-cloudinary",
+      "title": "Image Upload with Cloudinary in Next.js",
+      "difficulty": "medium",
+      "estimated_time": 40,
+      "category": "file_upload",
+      "tags": [
+        "nextjs",
+        "cloudinary",
+        "image-upload",
+        "file-upload",
+        "api-routes"
+      ],
+      "description": "Implement image upload functionality in a Next.js application using Cloudinary",
+      "files_to_modify": [
+        ".env.local",
+        "src/pages/api/upload.ts",
+        "package.json"
+      ],
+      "success_criteria": [
+        "Cloudinary SDK is installed and configured",
+        "Environment variables are properly set up",
+        "API route handles file uploads securely",
+        "File validation and error handling are implemented",
+        "Cloudinary test endpoint validates configuration",
+        "All tests pass successfully"
+      ]
+    }
+  ],
+  "metadata": {
+    "framework": "Next.js",
+    "language": "TypeScript",
+    "database": "PostgreSQL",
+    "orm": "Prisma",
+    "testing": "Jest",
+    "containerization": "Docker",
+    "linting": "ESLint + Prettier",
+    "last_updated": "2024-01-01",
+    "maintainer": "admin@cliarena.com"
+  }
+}
