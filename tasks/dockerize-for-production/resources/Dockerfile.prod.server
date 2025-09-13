@@ -1,0 +1,34 @@
+# Stage 1: Builder
+FROM node:18 AS builder
+
+WORKDIR /usr/src/app
+
+# Copy package files and install all dependencies
+COPY src/server/package*.json ./
+RUN npm install
+
+# Copy the rest of the source code
+COPY src/server/ .
+
+# Build the application
+RUN npm run build
+
+# Stage 2: Production
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+
+# Create a non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+# Copy package files and install only production dependencies
+COPY --from=builder /usr/src/app/package*.json ./
+RUN npm install --omit=dev
+
+# Copy the built application from the builder stage
+COPY --from=builder /usr/src/app/dist ./dist
+
+EXPOSE 8080
+
+CMD [ "node", "dist/index.js" ]

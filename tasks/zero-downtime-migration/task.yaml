@@ -1,0 +1,38 @@
+id: zero-downtime-migration
+title: "Implement a Database Schema Migration with Zero Downtime"
+description: |
+  Our business is going international! To support this, we need to update our `products` schema to handle multiple currencies. The `price` field, which is currently a simple number, needs to be changed to an object containing both an `amount` and a `currency`.
+
+  This is a critical change, and we cannot afford any downtime. Your mission is to perform this database schema migration without interrupting the live application. This requires a careful, multi-step approach.
+
+  **The Zero-Downtime Migration Strategy:**
+
+  1.  **Phase 1: Expand (Add the new field)**
+      - Modify the `Product` model in `src/server/src/models/Product.ts` to add the new `price` object (`{ amount: Number, currency: String }`).
+      - Keep the old `price` field for now.
+      - Update the application code (`productController.ts`) to write to **both** the old and new price fields. When reading, it should prioritize the new field but fall back to the old one.
+
+  2.  **Phase 2: Migrate (Backfill the data)**
+      - Create a migration script (`migration-script.js`) that finds all documents with the old `price` field and populates the new `price` object based on its value. Assume the existing prices are in 'USD'.
+      - Run this script against the database while the application is still running.
+
+  3.  **Phase 3: Contract (Clean up)**
+      - Once all data is migrated, update the application code again to **only** use the new `price` object.
+      - At this point, you can stop writing to the old `price` field.
+      - Finally, create another script to remove the old `price` field from all documents in the collection.
+
+author_email: "jules@example.com"
+difficulty: "hard"
+estimated_time: 120
+tags: ["database", "migration", "mongodb", "zero-downtime"]
+prerequisites: []
+files_to_modify:
+  - /repo/src/server/src/models/Product.ts
+  - /repo/src/server/src/controllers/productController.ts
+  - /repo/tasks/zero-downtime-migration/resources/migration-script.js
+success_criteria:
+  - "The Product model is updated to include the new price structure."
+  - "The application code is modified to handle both the old and new schemas simultaneously."
+  - "The migration script correctly backfills the data for all existing products."
+  - "The application continues to function correctly throughout the entire migration process."
+  - "A cleanup script is provided to remove the old price field after the migration is complete."

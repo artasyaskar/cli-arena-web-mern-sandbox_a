@@ -1,0 +1,35 @@
+id: migrate-to-oauth2
+title: "Migrate User Authentication from JWT to OAuth 2.0"
+description: |
+  Our current home-grown JWT authentication system has served us well, but it's time to upgrade to a more standard and secure solution. We want to implement OAuth 2.0 to allow users to log in with a third-party identity provider. This will improve security and user experience.
+
+  Your task is to refactor the application to use OAuth 2.0 for authentication. You will need to modify both the client and the server. We will provide a mock OAuth 2.0 server for you to test against.
+
+  **Requirements:**
+  1.  **Server-side changes:**
+      - Create a new route `/api/auth/oauth/callback` that will handle the callback from the OAuth provider.
+      - This callback handler should exchange the authorization code for an access token (by calling the mock provider's `/token` endpoint).
+      - It should then fetch user information from the provider's `/userinfo` endpoint.
+      - Based on the user information, it should either find or create a user in the local database.
+      - Finally, it should generate a JWT for the user and send it back to the client in a cookie.
+  2.  **Client-side changes:**
+      - The "Login" button should now redirect the user to the mock OAuth provider's authorization URL (`http://localhost:4000/auth`).
+      - After a successful login, the client should handle the JWT returned from the server and store it for subsequent requests.
+  3.  **Remove old JWT logic:**
+      - The old `/api/auth/login` endpoint should be disabled or removed.
+
+author_email: "jules@example.com"
+difficulty: "hard"
+estimated_time: 90
+tags: ["authentication", "oauth2", "security", "backend", "frontend"]
+prerequisites: []
+files_to_modify:
+  - /repo/src/server/src/routes/authRoutes.ts
+  - /repo/src/server/src/controllers/authController.ts
+  - /repo/src/client/src/App.tsx
+success_criteria:
+  - "The client redirects to the mock OAuth provider for login."
+  - "The server correctly handles the OAuth callback, exchanges the code for a token, and fetches user info."
+  - "A new user is created in the database if they don't exist."
+  - "A JWT is correctly issued to the client after a successful OAuth login."
+  - "The old JWT login endpoint is no longer functional."

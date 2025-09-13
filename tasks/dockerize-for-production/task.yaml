@@ -1,0 +1,35 @@
+id: dockerize-for-production
+title: "Create Production-Ready Dockerfiles"
+description: |
+  Our current Docker setup is great for local development, but it's not optimized for production. The images are too large, contain unnecessary development dependencies, and pose a potential security risk. We need to create lean, secure, and efficient Docker images for our production environment.
+
+  Your task is to create multi-stage Dockerfiles for both the `client` and `server` applications. These new Dockerfiles should be named `Dockerfile.prod` and placed in the respective `src/client` and `src/server` directories.
+
+  **Requirements:**
+  1.  **Multi-stage builds:**
+      - Use a `builder` stage to install dependencies and build the application.
+      - Use a final, lightweight stage (e.g., `node:18-alpine`) to copy over only the necessary build artifacts. This will significantly reduce the final image size.
+  2.  **Production dependencies only:**
+      - In the final stage, install only the production dependencies (i.e., `npm install --omit=dev`).
+  3.  **Security:**
+      - Run the application as a non-root user. Create a new user (e.g., `appuser`) and switch to it in the Dockerfile.
+  4.  **Client-specific optimizations:**
+      - For the client, the final stage should serve the static build output using a lightweight web server like `nginx`.
+  5.  **Server-specific optimizations:**
+      - For the server, ensure that the final image contains the compiled JavaScript files from the `dist` directory, the `node_modules` for production, and the `package.json`.
+
+author_email: "jules@example.com"
+difficulty: "hard"
+estimated_time: 75
+tags: ["docker", "devops", "optimization", "security", "production"]
+prerequisites: []
+files_to_modify:
+  - /repo/src/client/Dockerfile.prod
+  - /repo/src/server/Dockerfile.prod
+success_criteria:
+  - "New `Dockerfile.prod` files are created for both client and server."
+  - "The Dockerfiles use multi-stage builds."
+  - "The final images are significantly smaller than the development images."
+  - "The application runs as a non-root user in the final images."
+  - "The client image serves the static build output with Nginx."
+  - "The server image contains only the necessary production files."

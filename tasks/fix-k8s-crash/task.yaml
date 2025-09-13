@@ -1,0 +1,31 @@
+id: fix-k8s-crash
+title: "Fix a Production Crash in the Kubernetes Cluster"
+description: |
+  "Houston, we have a problem!" One of our customers reported that the application is crashing whenever they try to check out an item with a specific discount code. The whole backend service is restarting, which is affecting other users as well. We've traced the issue to our Kubernetes cluster.
+
+  Your mission, should you choose to accept it, is to dive into the production Kubernetes environment, figure out what's going on, and fix the bug. This won't be easy, as you'll need to work with a live (simulated) system.
+
+  **Your tasks are:**
+  1.  **Investigate the Crash:**
+      - Use `kubectl` to find the running pod for the `backend-service`.
+      - Check the logs of the crashing pod to find the error message and stack trace. This should point you to the root cause of the issue.
+  2.  **Identify and Fix the Bug:**
+      - Once you've identified the bug in the source code, you need to fix it. The bug is located in `src/server/src/controllers/product.controller.ts`.
+  3.  **Build and Deploy the Fix:**
+      - After fixing the code, you need to build a new Docker image with the tag `backend:2.0-fixed`.
+      - You will then need to update the Kubernetes deployment to use this new image, effectively "shipping" your fix to production.
+
+author_email: "jules@example.com"
+difficulty: "hard"
+estimated_time: 60
+tags: ["kubernetes", "docker", "debugging", "production", "crash"]
+prerequisites: []
+files_to_modify:
+  - /repo/src/server/src/controllers/product.controller.ts
+  - /repo/k8s/deployment.yaml
+success_criteria:
+  - "The crashing pod's logs are successfully retrieved and analyzed."
+  - "The bug in the product controller is corrected."
+  - "A new Docker image is built and tagged correctly."
+  - "The Kubernetes deployment is updated to use the new image."
+  - "The application no longer crashes when the specific discount code is used."

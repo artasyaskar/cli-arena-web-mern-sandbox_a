@@ -1,0 +1,30 @@
+id: generate-unit-tests
+title: "Generate Comprehensive Unit Tests for the Product Service"
+description: |
+  Our Product service is the backbone of our application, but its test coverage is dangerously low. We've had a few close calls with bugs that should have been caught by unit tests. It's time to pay our technical debt and write a solid suite of tests.
+
+  Your goal is to write comprehensive unit tests for the `productRepository.ts` file. You should aim for at least 90% test coverage for this file.
+
+  **Your tasks are:**
+  1.  **Analyze the code:**
+      - Read and understand the `productRepository.ts` file in `src/server/src/repositories`.
+  2.  **Write the tests:**
+      - Create a new test file: `src/server/tests/product.repository.test.ts`.
+      - Write unit tests for all the methods in `productRepository.ts`.
+      - Make sure to cover edge cases, such as what happens when a product is not found, or when invalid data is provided.
+  3.  **Run the tests and check coverage:**
+      - Run the tests using the `npm test -- --coverage` command.
+      - Ensure that the tests pass and that the coverage for `productRepository.ts` is at least 90%.
+
+author_email: "jules@example.com"
+difficulty: "hard"
+estimated_time: 45
+tags: ["testing", "jest", "unit-tests", "backend"]
+prerequisites: []
+files_to_modify:
+  - /repo/src/server/tests/product.repository.test.ts
+success_criteria:
+  - "A new test file for the product repository is created."
+  - "The tests cover all methods in the repository."
+  - "The tests include checks for edge cases and invalid data."
+  - "The test coverage for `productRepository.ts` is at least 90%."
