@@ -18,6 +18,12 @@ server {
   listen 80;
   server_name localhost;
 
+  # Security Headers
+  add_header X-Frame-Options "SAMEORIGIN";
+  add_header X-Content-Type-Options "nosniff";
+  add_header Referrer-Policy "no-referrer";
+  add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self';";
+
   location / {
     root /usr/share/nginx/html;
     index index.html;

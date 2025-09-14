@@ -20,6 +20,11 @@ export const checkout = async (req: Request, res: Response) => {
   try {
     const { productId, discountCode } = req.body;
 
+    // Second crash scenario: specific product ID causes a crash
+    if (productId === '60d5f3b3b4854b32348a22a4') {
+      throw new Error('Critical failure for special product ID');
+    }
+
     const product = await Product.findById(productId);
 
     if (!product) {

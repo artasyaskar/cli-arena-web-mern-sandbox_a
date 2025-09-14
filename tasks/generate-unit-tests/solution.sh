@@ -34,9 +34,11 @@ describe('Product Repository', () => {
   });
 
   describe('findAll', () => {
-    it('should return all products with purchase counts', async () => {
+    it('should return all products with correct purchase counts', async () => {
       const product1 = await Product.create({ name: 'Product 1', description: 'Desc 1', price: 10, category: 'Category 1' });
       const product2 = await Product.create({ name: 'Product 2', description: 'Desc 2', price: 20, category: 'Category 2' });
+      const product3 = await Product.create({ name: 'Product 3', description: 'Desc 3', price: 30, category: 'Category 3' });
+
 
       await Purchase.create({ productId: product1._id, userId: new mongoose.Types.ObjectId(), quantity: 1, totalPrice: 10 });
       await Purchase.create({ productId: product1._id, userId: new mongoose.Types.ObjectId(), quantity: 1, totalPrice: 10 });
@@ -44,13 +46,15 @@ describe('Product Repository', () => {
 
       const products = await productRepository.findAll();
 
-      expect(products).toHaveLength(2);
+      expect(products).toHaveLength(3);
       const p1 = products.find(p => (p as any).name === 'Product 1');
       const p2 = products.find(p => (p as any).name === 'Product 2');
+      const p3 = products.find(p => (p as any).name === 'Product 3');
 
-      if (p1 && p2) {
+      if (p1 && p2 && p3) {
         expect((p1 as any).purchaseCount).toBe(2);
         expect((p2 as any).purchaseCount).toBe(1);
+        expect((p3 as any).purchaseCount).toBe(0);
       } else {
         fail('Products not found in result');
       }
@@ -63,7 +67,7 @@ describe('Product Repository', () => {
   });
 
   describe('create', () => {
-    it('should create a new product', async () => {
+    it('should create a new product with valid data', async () => {
       const productData = { name: 'New Product', description: 'A great new product', price: 99.99, category: 'New' };
       const product = await productRepository.create(productData);
 
@@ -73,11 +77,16 @@ describe('Product Repository', () => {
       const dbProduct = await Product.findById(product._id);
       expect(dbProduct).toBeDefined();
     });
+
+    it('should fail to create a product with missing required fields', async () => {
+        const productData = { name: 'Incomplete Product' }; // Missing description, price, category
+        // We expect the save() method to throw a validation error
+        await expect(productRepository.create(productData)).rejects.toThrow(mongoose.Error.ValidationError);
+    });
   });
 
   describe('search', () => {
     beforeEach(async () => {
-        // We need to create a text index on the model for text search to work
         await Product.collection.createIndex({ name: "text", description: "text" });
         await Product.create({ name: 'Laptop Pro', description: 'A powerful laptop', price: 1500, category: 'Electronics' });
         await Product.create({ name: 'Coffee Mug', description: 'A simple mug', price: 15, category: 'Kitchen' });
